@@ -1,5 +1,5 @@
 # TODO: better auth somehow
-class PoopMail < Sinatra::Base
+class Goldblum < Sinatra::Base
   module AuthHelpers
     def protected!
       return if authorized?

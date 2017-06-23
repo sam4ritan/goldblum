@@ -1,4 +1,4 @@
-class PoopMail
+class Goldblum
   module MailHelpers
     def mail_with_template(template, recipient, subject, locals={})
       Pony.mail({

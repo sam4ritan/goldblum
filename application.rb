@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.require
 
-class PoopMail < Sinatra::Base
+class Goldblum < Sinatra::Base
   # generic application settings
   settings = YAML.load(File.new('./config/application.yml'))
   settings.each_pair do |key, value|
@@ -10,8 +10,10 @@ class PoopMail < Sinatra::Base
 
   # mailer settings
   configure :development do
-    set :smtp_config, YAML.load(File.new('./config/smtp.yml'))
-    set :slack_token, YAML.load(File.new('./config/slack.yml'))[:token]
+    set :smtp_config,       YAML.load(File.new('./config/smtp.yml'))
+    slack_tokens          = YAML.load(File.new('./config/slack.yml'))
+    set :slack_token,       slack_tokens[:token]
+    set :slack_oauth_token, slack_tokens[:oauth_token]
   end
 
   [:staging, :production].each do |environment|
@@ -26,7 +28,8 @@ class PoopMail < Sinatra::Base
         enable_starttls_auto: ENV['SMTP_ENABLETLS'] == 'true',
       }
 
-      set :slack_token, ENV['SLACK_TOKEN']
+      set :slack_token,       ENV['SLACK_TOKEN']
+      set :slack_oauth_token, ENV['SLACK_OAUTH_TOKEN']
     end
   end
 end
@@ -34,5 +37,5 @@ end
 Dir[File.join(File.dirname(__FILE__), 'app/**/*.rb')].sort.each { |f| require f }
 
 if __FILE__ == $0
-  PoopMail.run!
+  Goldblum.run!
 end
