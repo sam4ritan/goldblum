@@ -1,0 +1,5 @@
+.dropbox
+.DS_Store
+.sass-cache/
+tmp/
+public/assets/
