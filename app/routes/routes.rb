@@ -14,6 +14,8 @@ class Goldblum < Sinatra::Base
   # text=94070
   # response_url=https://hooks.slack.com/commands/1234/5678
 
+  channel_id = 'C28F0KLBD'
+
   def slack_api(action, user_id, params = {})
     Goldblum::SlackAPI.post("/api/#{action}", {
       body: {
@@ -58,14 +60,14 @@ class Goldblum < Sinatra::Base
     # Post a message
 
     slack_api('chat.postMessage', {
-      channel: 'C28F0KLBD',
+      channel: channel_id,
       as_user: false,
       icon_emoji: ':goldblum:',
       text: 'I’ve been Goldblum’d!',
     })
 
     content_body = {
-      channel:       'C28F0KLBD',
+      channel:       channel_id,
       response_type: 'in_channel',
       text:          "#{user['profile']['real_name']} has been Goldblum’d!",
     }.to_json
@@ -73,7 +75,7 @@ class Goldblum < Sinatra::Base
     HTTParty.post(
       params['response_url'],
       {
-        body:    {},
+        body:    content_body,
         headers: {
           'Content-Type' => 'application/json'
         }
