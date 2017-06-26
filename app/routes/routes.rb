@@ -15,7 +15,7 @@ class Goldblum < Sinatra::Base
   # response_url=https://hooks.slack.com/commands/1234/5678
 
   def slack_api(action, user_id, params = {})
-    HTTParty.post("https://slack.com/api/#{action}", {
+    Goldblum::SlackAPI.post("/api/#{action}", {
       body: {
         token: settings.slack_oauth_token,
         user: user_id,
@@ -37,11 +37,31 @@ class Goldblum < Sinatra::Base
 
     user = slack_api('users.profile.get', params['user_id'])
 
+    # Set status
     slack_api('users.profile.set', params['user_id'], {
       profile: {
         status_emoji: ':goldblum:',
         status_text: 'I’ve been Goldblum’d',
+        title: 'random quote',
       }.to_json,
+    })
+
+    # Set avatar
+    filepath = "app/avatars/#{sprintf("%03d", rand(1..25))}.jpg"
+    slack_api('users.setPhoto', params['user_id'], {
+      image: File.new(filepath),
+      crop_x: 0,
+      crop_y: 0,
+      crop_w: 500,
+    })
+
+    # Post a message
+
+    slack_api('chat.postMessage', {
+      channel: 'C28F0KLBD',
+      as_user: false,
+      icon_emoji: ':goldblum:',
+      text: 'I’ve been Goldblum’d!',
     })
 
     content_body = {
@@ -53,7 +73,7 @@ class Goldblum < Sinatra::Base
     HTTParty.post(
       params['response_url'],
       {
-        body:    content_body,
+        body:    {},
         headers: {
           'Content-Type' => 'application/json'
         }

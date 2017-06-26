@@ -7,6 +7,7 @@ gem 'sinatra'
 gem 'mail'
 gem 'pony'
 gem 'httparty'
+gem 'httmultiparty'
 
 group :development do
   gem 'pry'
