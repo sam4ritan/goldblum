@@ -140,30 +140,8 @@ class Goldblum < Sinatra::Base
       }.to_json
     else
       # cancel and remove the message(s)
-      # doesn't work — claims there's no message with these timestamps :(
-      # [action_ts, message_ts].each do |timestamp|
-      #   DeleteMessage.perform_async(user_id, timestamp, channel_id)
-      # end
-
-      # also doesn't work - claims there's no message with this timestamp
-      # Slack.api('chat.update', user_id, {
-      #   ts:          message_ts,
-      #   channel:     channel_id,
-      #   text:        "Standing down… for now",
-      # })
-
-      # doesn't work - claims there's no message with this timestamp
-      # DeleteMessage.perform_async(user_id, message_ts, channel_id, 2)
-
-      # doesn't work - claims there's no message with this timestamp
-      # Slack.api('chat.delete', user_id, {
-      #   ts: message_ts,
-      #   channel: channel_id,
-      # })
-
-      # the only thing that works :(
       {
-        text: 'Standing down… for now'
+        delete_original: true
       }.to_json
     end
   end
