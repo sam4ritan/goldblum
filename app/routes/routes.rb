@@ -31,26 +31,57 @@ class Goldblum < Sinatra::Base
     first_name    = user['profile']['first_name']
     email_address = user['profile']['email']
 
-    # Set status
-    SetProfile.perform_async(user_id)
+    if settings.perform_goldblum
+      # Set status
+      SetProfile.perform_async(user_id)
 
-    # Set avatar
-    SetPhoto.perform_async(user_id)
+      # Set avatar
+      SetPhoto.perform_async(user_id)
 
-    # Post a message
-    # PostMessage.perform_async(settings.channel_id)
+      # TODO: Post a message (alternative to SendResponse)
+      # PostMessage.perform_async(settings.channel_id)
 
-    # Send response back to Slack
-    SendResponse.perform_async(params['response_url'], settings.channel_id, real_name)
+      # Send response back to Slack
+      SendResponse.perform_async(params['response_url'], settings.channel_id, real_name)
 
-    # TODO: fire off email
-    # SendEmail.perform_async(email_address, first_name, real_name)
-
-    # returning nil will ensure the command doesn’t output anything else
+      # TODO: fire off email
+      # SendEmail.perform_async(email_address, first_name, real_name)
+    end
 
     {
-      "response_type": "in_channel",
-      "text": "Initiating Goldblum protocol…"
+      "response_type": "ephemeral",
+      "text": "Initiate Goldblum protocol?",
+      "attachments": [
+        "fallback": "You are unable to Goldblum",
+        "callback_id": "goldblum",
+        "color": "#ff0000",
+        "attachment_type": "default",
+        "actions": [
+          {
+            "name": "action",
+            "text": "Cancel",
+            "type": "button",
+            "value": "cancel"
+          },
+          {
+            "name": "action",
+            "text": "Proceed",
+            "style": "danger",
+            "type": "button",
+            "value": "proceed",
+            "confirm": {
+              "title": "Execute Goldblum protocol on this user",
+              "text": "Are you sure?",
+              "ok_text": "Yes, do it!",
+              "dismiss_text": "On second thoughts, no"
+            }
+          }
+        ]
+      ]
     }.to_json
+  end
+
+  post '/goldblum' do
+    # TODO: message button action endpoint
   end
 end

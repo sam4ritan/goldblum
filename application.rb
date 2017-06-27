@@ -8,6 +8,9 @@ class Goldblum < Sinatra::Base
     set key.to_sym, value
   end
 
+  # debugging the command
+  set :perform_goldblum, false
+
   # mailer settings
   configure :development do
     set :smtp_config,       YAML.load(File.new('./config/smtp.yml'))
