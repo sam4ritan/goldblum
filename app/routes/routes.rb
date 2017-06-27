@@ -39,34 +39,36 @@ class Goldblum < Sinatra::Base
     callback_id = "goldblum_#{Time.now.to_i.base62_encode}"
 
     {
-      "response_type": "ephemeral",
+      # "response_type": "in_channel",
       "text": "Initiate Goldblum protocol?",
       "attachments": [
-        "fallback": "You are unable to Goldblum :sob:",
-        "callback_id": callback_id,
-        "color": "#ff0000",
-        "attachment_type": "default",
-        "actions": [
-          {
-            "name": "execute",
-            "text": "Cancel",
-            "type": "button",
-            "value": "cancel"
-          },
-          {
-            "name": "execute",
-            "text": "Proceed",
-            "style": "danger",
-            "type": "button",
-            "value": "proceed",
-            "confirm": {
-              "title": "Execute Goldblum protocol on this user",
-              "text": "Are you sure?",
-              "ok_text": "Yes, do it!",
-              "dismiss_text": "On second thoughts, no"
+        {
+          "fallback": "You are unable to Goldblum :sob:",
+          "callback_id": callback_id,
+          "color": "#ff0000",
+          "attachment_type": "default",
+          "actions": [
+            {
+              "name": "execute",
+              "text": "Cancel",
+              "type": "button",
+              "value": "cancel"
+            },
+            {
+              "name": "execute",
+              "text": "Proceed",
+              "style": "danger",
+              "type": "button",
+              "value": "proceed",
+              "confirm": {
+                "title": "Execute Goldblum protocol on this user",
+                "text": "Are you sure?",
+                "ok_text": "Yes, do it!",
+                "dismiss_text": "On second thoughts, no"
+              }
             }
-          }
-        ]
+          ]
+        }
       ]
     }.to_json
   end
@@ -104,29 +106,61 @@ class Goldblum < Sinatra::Base
     #   "response_url": "https://hooks.slack.com/actions/T47563693/6204672533/x7ZLaiVMoECAW50Gw1ZYAXEM"
     # }
 
-    payload = JSON.parse(URI.decode(params['payload']))
-
+    payload       = JSON.parse(URI.decode(params['payload']))
     action_value  = payload['actions'].first['value']
+    channel_id    = payload['channel']['id']
+    action_ts     = payload['action_ts']
+    message_ts    = payload['message_ts']
     user_id       = payload['user']['id']
-    user          = Slack.api('users.profile.get', user_id)
-    real_name     = user['profile']['real_name']
-    first_name    = user['profile']['first_name']
-    email_address = user['profile']['email']
-    response_url  = payload['response_url']
 
-    # Set status
-    SetProfile.perform_async(user_id)
+    PrintJSON.perform_async(payload)
 
-    # Set avatar
-    SetPhoto.perform_async(user_id)
+    if action_value === 'proceed'
+      # proceed with Goldblum
+      user_name     = payload['user']['name']
+      response_url  = payload['response_url']
 
-    # TODO: Post a message (alternative to SendResponse)
-    # PostMessage.perform_async(settings.channel_id)
+      # Set status
+      SetProfile.perform_async(user_id)
 
-    # Send response back to Slack
-    SendResponse.perform_async(response_url, settings.channel_id, real_name)
+      # Set avatar
+      SetPhoto.perform_async(user_id)
 
-    # TODO: fire off email
-    # SendEmail.perform_async(email_address, first_name, real_name)
+      # TODO: Post a message (alternative to SendResponse)
+      PostMessage.perform_async(user_id, settings.channel_id, "@#{user_name} has been Goldblum’d!")
+
+      # Send response back to Slack
+      # SendResponse.perform_async(response_url, channel_id, 'in_channel', "@#{user_name} has been Goldblum’d!")
+
+      # TODO: fire off email
+      # SendEmail.perform_async(user_id, email_address, first_name, real_name)
+    else
+      # cancel and remove the message(s)
+      # doesn't work — claims there's no message with these timestamps :(
+      # [action_ts, message_ts].each do |timestamp|
+      #   DeleteMessage.perform_async(user_id, timestamp, channel_id)
+      # end
+
+      # also doesn't work - claims there's no message with this timestamp
+      # Slack.api('chat.update', user_id, {
+      #   ts:          message_ts,
+      #   channel:     channel_id,
+      #   text:        "Standing down… for now",
+      # })
+
+      # doesn't work - claims there's no message with this timestamp
+      # DeleteMessage.perform_async(user_id, message_ts, channel_id, 2)
+
+      # doesn't work - claims there's no message with this timestamp
+      # Slack.api('chat.delete', user_id, {
+      #   ts: message_ts,
+      #   channel: channel_id,
+      # })
+
+      # the only thing that works :(
+      {
+        text: 'Standing down… for now'
+      }.to_json
+    end
   end
 end

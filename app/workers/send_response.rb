@@ -2,13 +2,13 @@ class Goldblum
   class SendResponse
     include Sidekiq::Worker
 
-    def perform(url, channel_id, real_name)
+    def perform(url, channel_id, response_type, text)
       HTTParty.post(
         url, {
           body: {
             channel:       channel_id,
-            response_type: 'in_channel',
-            text:          "#{real_name} has been Goldblum’d!",
+            response_type: response_type,
+            text:          text,
           }.to_json,
           headers: {
             'Content-Type' => 'application/json'
