@@ -126,14 +126,15 @@ class Goldblum < Sinatra::Base
       # Set avatar
       SetPhoto.perform_async(user_id)
 
-      # TODO: Post a message (alternative to SendResponse)
-      PostMessage.perform_async(user_id, settings.channel_id, "@#{user_name} has been Goldblum’d!")
-
-      # Send response back to Slack
-      # SendResponse.perform_async(response_url, channel_id, 'in_channel', "@#{user_name} has been Goldblum’d!")
+      # Post a message
+      PostMessage.perform_async(user_id, settings.channel_id, "@#{user_name} has transformed into Jeff Goldblum!")
 
       # TODO: fire off email
       # SendEmail.perform_async(user_id, email_address, first_name, real_name)
+
+      {
+        text: 'Initiating Goldblum protocol…'
+      }.to_json
     else
       # cancel and remove the message(s)
       # doesn't work — claims there's no message with these timestamps :(

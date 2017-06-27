@@ -6,11 +6,9 @@ class Goldblum
       Slack.api('users.profile.set', user_id, {
         profile: {
           status_emoji: ':goldblum:',
-          status_text: 'I’ve been Goldblum’d',
+          status_text: 'I’ve been Goldblum’d!',
           title: Quote.get,
-          first_name: 'Jeff',
-          last_name: 'Goldblum',
-        }.to_json,
+        }.merge(Character.get).to_json,
       })
     end
   end
