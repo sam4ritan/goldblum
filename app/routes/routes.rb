@@ -83,6 +83,11 @@ class Goldblum < Sinatra::Base
       # Post a message
       PostMessage.perform_async(user_id, settings.channel_id, "@#{user_name} has transformed into #{character[:first_name]} #{character[:last_name]}!")
 
+      # Clear the in progress message
+      SendResponse.perform_async(response_url, {
+        delete_original: true,
+      })
+
       # TODO: fire off email
       # SendEmail.perform_async(user_id, avatar_path, character, quote)
 
