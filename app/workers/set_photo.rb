@@ -2,11 +2,9 @@ class Goldblum
   class SetPhoto
     include Sidekiq::Worker
 
-    def perform(user_id)
-      filepath = "app/avatars/#{sprintf("%03d", rand(1..25))}.jpg"
-
+    def perform(user_id, avatar_path)
       Slack.api('users.setPhoto', user_id, {
-        image: File.new(filepath),
+        image: File.new(avatar_path),
         crop_x: 0,
         crop_y: 0,
         crop_w: 500,

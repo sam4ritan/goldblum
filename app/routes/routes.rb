@@ -120,18 +120,20 @@ class Goldblum < Sinatra::Base
       user_name     = payload['user']['name']
       response_url  = payload['response_url']
       character     = Character.get
+      avatar_path   = Avatar.get
+      quote         = Quote.get
 
       # Set status
-      SetProfile.perform_async(user_id, character)
+      SetProfile.perform_async(user_id, character, quote)
 
       # Set avatar
-      SetPhoto.perform_async(user_id)
+      SetPhoto.perform_async(user_id, avatar_path)
 
       # Post a message
       PostMessage.perform_async(user_id, settings.channel_id, "@#{user_name} has transformed into #{character[:first_name]} #{character[:last_name]}!")
 
       # TODO: fire off email
-      # SendEmail.perform_async(user_id, email_address, first_name, real_name)
+      # SendEmail.perform_async(user_id, avatar_path, character, quote)
 
       {
         text: 'Initiating Goldblum protocol…'
