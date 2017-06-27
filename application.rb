@@ -30,6 +30,10 @@ class Goldblum < Sinatra::Base
 
       set :slack_token,       ENV['SLACK_TOKEN']
       set :slack_oauth_token, ENV['SLACK_OAUTH_TOKEN']
+
+      Sidekiq.configure_client do |config|
+        config.redis = { url: ENV['REDIS_URL'] }
+      end
     end
   end
 end

@@ -3,6 +3,7 @@ ruby '2.4.0'
 
 gem 'rack'
 gem 'puma'
+gem 'sidekiq'
 gem 'sinatra'
 gem 'mail'
 gem 'pony'
