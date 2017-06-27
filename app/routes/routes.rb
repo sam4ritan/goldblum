@@ -119,15 +119,16 @@ class Goldblum < Sinatra::Base
       # proceed with Goldblum
       user_name     = payload['user']['name']
       response_url  = payload['response_url']
+      character     = Character.get
 
       # Set status
-      SetProfile.perform_async(user_id)
+      SetProfile.perform_async(user_id, character)
 
       # Set avatar
       SetPhoto.perform_async(user_id)
 
       # Post a message
-      PostMessage.perform_async(user_id, settings.channel_id, "@#{user_name} has transformed into Jeff Goldblum!")
+      PostMessage.perform_async(user_id, settings.channel_id, "@#{user_name} has transformed into #{character[:first_name]} #{character[:last_name]}!")
 
       # TODO: fire off email
       # SendEmail.perform_async(user_id, email_address, first_name, real_name)
