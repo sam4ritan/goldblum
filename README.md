@@ -1,9 +1,13 @@
 # Goldblum
 
-A Slack slash-command endpoint that:
+![Ian Malcolm](http://snap.kapowaz.net/ian-malcolm.jpg)
 
-1. Posts an emoji into a specified channel
-2. Sets the user’s status
-3. Sends an email to the user telling them what happened, and why
+A Slack integration to turn your security-lax colleagues (temporarily) into Jeff Goldblum.
 
-Rather than acting immediately, a message is displayed to the user _privately_ first, giving them the opportunity to undo the effects before they happen, so long as they enter the /flush command in the first 30 seconds after being Goldblum’d.
+If you find a colleague’s computer unlocked, typing the `/goldblum` command (and following the prompt) will:
+
+1. Change their name to a random Jeff Goldblum character
+2. Set their bio to a random Jeff Goldblum quote
+3. Set their avatar to a random Jeff Goldblum photo
+4. Post a message in `#general` announcing that they’ve been transformed
+5. Send an email to the user telling them what happened, and why [NYI]
