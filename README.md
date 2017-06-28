@@ -16,6 +16,4 @@ A Slack integration to turn your security-lax colleagues (temporarily) into Jeff
 
 * Send an email to the victim
 * Keep a log of who’s been goldblummed
-* More quotes, avatars and characters
-* Unify random things in a single class
 * Set the target channel using an ENV variable

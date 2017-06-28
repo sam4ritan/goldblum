@@ -1,18 +1,52 @@
 - :first_name: "Jeff"
   :last_name: "Goldblum"
+  :quotes:
+    - "I, uh, don’t think I’m, y’know, so different than your average, y’know, average."
+    - "No pay, no Goldblum. That’s it."
+    - "Well, of course I would choose to be the top scientist in my field."
+    - "I love the ocean. Boats, not so much."
+    - "I don’t go to these places where there are belly dancers and this and that."
+    - "Acting is nothing more or less than playing. The idea is to humanize life."
+    - "The very spicey dill pickle, not too soft, but not hard either, I’m very particular about my pickles."
+  :avatar_path: jeffgoldblum
+  :avatar_count: 16
 - :first_name: "Seth"
   :last_name: "Brundle"
+  :quotes:
+    - "You have to leave now, and never come back here. Have you ever heard of insect politics? Neither have I. Insects… don’t have politics. They’re very… brutal. No compassion, no compromise. We can’t trust the insect. I’d like to become the first… insect politician."
+    - "I’m an insect who dreamt he was a man and loved it. But now the dream is over... and the insect is awake."
+    - "My teeth have begun to fall out. The medicine cabinet is now the Brundle Museum of Natural History. You wanna see what else is in it?"
+    - "Am I becoming a hundred-and-eighty-five-pound fly? No, I’m becoming something that never existed before. I'm becoming… Brundlefly. Don’t you think that's worth a Nobel Prize or two?"
+    - "There was an old lady who swallowed a fly, perhaps she’ll die."
+  :avatar_path: sethbrundle
+  :avatar_count: 3
 - :first_name: "Ian"
   :last_name: "Malcolm"
-- :first_name: "David"
-  :last_name: "Levinson"
-- :first_name: "Verminous"
-  :last_name: "Skumm"
+  :quotes:
+    - "Your scientists were so preoccupied with whether or not they could, they didn’t stop to think if they should."
+    - "When you gotta go, you gotta go."
+    - "Life, uh, finds a way."
+    - "God creates dinosaurs. God destroys dinosaurs. God creates Man. Man destroys God. Man creates Dinosaurs..."
+    - "Chaotician, actually. Chaotician."
+    - "How do you know they’re all female? Does someone go into the park and, uh... pull up the dinosaurs’ skirts?"
+    - "Boy, do I hate being right all the time."
+    - "Oh yeah, oohing and ahhing, that’s how it always starts, but later there’s the running and screaming."
+  :avatar_path: ianmalcolm
+  :avatar_count: 5
 - :first_name: "Alistair"
   :last_name: "Hennessey"
+  :quotes:
+    - "How are things going with your - what are you calling it? Leopard fish?"
+    - "Is this my espresso machine? Wh-what is-h-how did you get my espresso machine?"
+    - "Oh, yeah, as a matter of fact it is. I just became a Knight in Portugal, the Presidente gave a special ball…"
+    - "They made soup out of my research turtles."
+    - "Is that one of mine? I think one of my research turtles survived."
+  :avatar_path: alistairhennessey
+  :avatar_count: 3
 - :first_name: "Chef"
   :last_name: "Goldblum"
-- :first_name: "En Dwi"
-  :last_name: "Gast"
-- :first_name: "The"
-  :last_name: "Grandmaster"
+  :quotes:
+    - "I like food, I’m very interested in food, but you’ll have to wait."
+    - "I’m doing a little research for some work that I’m going to do in my chosen profession"
+  :avatar_path: chefgoldblum
+  :avatar_count: 2

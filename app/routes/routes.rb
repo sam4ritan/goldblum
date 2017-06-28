@@ -70,18 +70,16 @@ class Goldblum < Sinatra::Base
       # proceed with Goldblum
       user_name     = payload['user']['name']
       response_url  = payload['response_url']
-      character     = Character.get
-      avatar_path   = Avatar.get
-      quote         = Quote.get
+      character     = RandomCharacter.get
 
       # Set status
-      SetProfile.perform_async(user_id, character, quote)
+      SetProfile.perform_async(user_id, character)
 
       # Set avatar
-      SetPhoto.perform_async(user_id, avatar_path)
+      SetPhoto.perform_async(user_id, "public/#{character[:avatar_path]}")
 
       # Post a message
-      PostMessage.perform_async(user_id, settings.channel_id, "@#{user_name} has transformed into #{character[:first_name]} #{character[:last_name]}!")
+      PostMessage.perform_async(user_id, settings.channel_id, "@#{user_name} has transformed into :goldblum: #{character[:first_name]} #{character[:last_name]}!")
 
       # Clear the in progress message
       SendResponse.perform_async(response_url, {
