@@ -88,8 +88,8 @@ class Goldblum < Sinatra::Base
         delete_original: true,
       })
 
-      # TODO: fire off email
-      # SendEmail.perform_async(user_id, avatar_path, character, quote)
+      # Send an email message
+      SendEmail.perform_async(user_id, character)
 
       {
         text: 'Initiating Goldblum protocol…'
