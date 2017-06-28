@@ -1,7 +1,4 @@
 .dropbox
 .DS_Store
-.sass-cache/
 slack.yml
 smtp.yml
-tmp/
-public/assets/
