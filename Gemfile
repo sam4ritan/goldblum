@@ -10,7 +10,4 @@ gem 'pony'
 gem 'httparty'
 gem 'httmultiparty'
 gem 'base62'
-
-group :development do
-  gem 'pry'
-end
+gem 'pry'
