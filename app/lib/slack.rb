@@ -21,6 +21,8 @@ class Goldblum
       puts "<response>"
       puts URI.decode(response.body)
       puts "</response>"
+
+      response
     end
   end
 end
