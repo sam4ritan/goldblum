@@ -2,12 +2,20 @@
 
 ![Ian Malcolm](http://snap.kapowaz.net/ian-malcolm.jpg)
 
-A Slack integration to turn your security-lax colleagues (temporarily) into Jeff Goldblum.
+> Your scientists were so preoccupied with whether or not they could, they didn't stop to think if they should.
 
-If you find a colleague’s computer unlocked, typing the `/goldblum` command (and following the prompt) will:
+A Slack integration to turn your security-lax colleagues (temporarily) into Jeff Goldblum. If you find a colleague’s computer unlocked, typing the `/goldblum` command (and following the prompt) will:
 
 1. Change their name to a random Jeff Goldblum character
 2. Set their bio to a random Jeff Goldblum quote
 3. Set their avatar to a random Jeff Goldblum photo
 4. Post a message in `#general` announcing that they’ve been transformed
-5. Send an email to the user telling them what happened, and why [NYI]
+5. Send an email to the user telling them what happened, and why (Not yet implemented)
+
+### TODO:
+
+* Send an email to the victim
+* Keep a log of who’s been goldblummed
+* More quotes, avatars and characters
+* Unify random things in a single class
+* Set the target channel using an ENV variable
