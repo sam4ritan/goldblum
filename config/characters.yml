@@ -9,7 +9,7 @@
     - "Acting is nothing more or less than playing. The idea is to humanize life."
     - "The very spicey dill pickle, not too soft, but not hard either, I’m very particular about my pickles."
   :avatar_path: jeffgoldblum
-  :avatar_count: 16
+  :avatar_count: 18
 - :first_name: "Seth"
   :last_name: "Brundle"
   :quotes:
@@ -19,7 +19,7 @@
     - "Am I becoming a hundred-and-eighty-five-pound fly? No, I’m becoming something that never existed before. I'm becoming… Brundlefly. Don’t you think that's worth a Nobel Prize or two?"
     - "There was an old lady who swallowed a fly, perhaps she’ll die."
   :avatar_path: sethbrundle
-  :avatar_count: 3
+  :avatar_count: 5
 - :first_name: "Ian"
   :last_name: "Malcolm"
   :quotes:
@@ -42,7 +42,7 @@
     - "They made soup out of my research turtles."
     - "Is that one of mine? I think one of my research turtles survived."
   :avatar_path: alistairhennessey
-  :avatar_count: 3
+  :avatar_count: 4
 - :first_name: "Chef"
   :last_name: "Goldblum"
   :quotes:
