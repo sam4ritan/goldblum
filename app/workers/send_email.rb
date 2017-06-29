@@ -20,7 +20,7 @@ class Goldblum
         from:           "IT Support <it.support@deliveroo.co.uk>",
         subject:        'You’ve been Goldblum’d!',
         html_body:      Goldblum.new.helpers.erb(:email, {}, locals: {
-          image_url:    "https://goldblum.herokuapp.com/#{character['avatar_path']}",
+          image_url:    character['avatar_path'],
           hero_heading: "#{character['first_name']} #{character['last_name']}",
           hero_text:    "“#{character['quote']}”",
         }),
