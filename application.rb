@@ -15,7 +15,7 @@ class Goldblum < Sinatra::Base
     configure environment do
       set :slack_token,       ENV['SLACK_TOKEN']
       set :slack_oauth_token, ENV['SLACK_OAUTH_TOKEN']
-      set :channel_id,        ENV['SLACK_CHANNEL_ID']
+      set :channel,           ENV['SLACK_CHANNEL']
 
       Sidekiq.configure_client do |config|
         config.redis = { url: ENV['REDIS_URL'] }
@@ -24,6 +24,7 @@ class Goldblum < Sinatra::Base
   end
 end
 
+Dir[File.join(File.dirname(__FILE__), 'app/init/*.rb')].sort.each { |f| require f }
 Dir[File.join(File.dirname(__FILE__), 'app/**/*.rb')].sort.each { |f| require f }
 
 if __FILE__ == $0
