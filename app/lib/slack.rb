@@ -3,7 +3,7 @@ class Goldblum
     include HTTMultiParty
     base_uri 'https://slack.com/'
 
-    def self.api(action, user_id, params = {})
+    def self.api(action, user_id: nil, **params)
       post_params = {
         body: {
           token: Goldblum.settings.slack_oauth_token,

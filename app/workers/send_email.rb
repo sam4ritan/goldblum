@@ -4,7 +4,7 @@ class Goldblum
     include Sinatra::Templates
 
     def perform(user_id, character)
-      user        = Goldblum::Slack.api('users.profile.get', user_id)
+      user        = Goldblum::Slack.api('users.profile.get', user_id: user_id)
       smtp_config = {
         user_name:            ENV['SMTP_USER_NAME'],
         password:             ENV['SMTP_PASSWORD'],
