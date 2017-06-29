@@ -79,7 +79,7 @@ class Goldblum < Sinatra::Base
       SetPhoto.perform_async(user_id, "public/#{character[:avatar_path]}")
 
       # Post a message
-      PostMessage.perform_async(user_id, settings.channel_id, "@#{user_name} has transformed into :goldblum: #{character[:first_name]} #{character[:last_name]}!")
+      PostMessage.perform_async(user_id, settings.channel_id, "@#{user_name} has transformed into :goldblum: *#{character[:first_name]} #{character[:last_name]}*!")
 
       # Clear the in progress message
       SendResponse.perform_async(response_url, {
