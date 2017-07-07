@@ -1,6 +1,6 @@
 # Goldblum
 
-![Ian Malcolm](http://snap.kapowaz.net/ian-malcolm.jpg)
+![Ian Malcolm](http://goldblum.herokuapp.com/avatars/ianmalcolm/004.jpg)
 
 > Your scientists were so preoccupied with whether or not they could, they didn't stop to think if they should.
 
